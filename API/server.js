@@ -21,8 +21,8 @@ if (!process.env.VIEWGUESSER_YOUTUBE_API_KEY) {
 }
 
 // Check if Postgres Connection String is set
-if (!process.env.DANE_LOL_PG_DATABASE_URL) {
-  console.error('Error: PG CONNECTION URL is not set in the environment variables.');
+if (!process.env.PG_DATABASE_URL) {
+  console.error('Error: PG_CONNECTION_URL is not set in the environment variables.');
   process.exit(1);
 }
 
