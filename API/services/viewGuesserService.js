@@ -1,9 +1,9 @@
+
 const axios = require('axios');
 const NodeCache = require('node-cache');
 const { Pool } = require('pg');
 const config = require('../config/config');
 
-// Cache and session data storage
 const videoCache = new NodeCache({ stdTTL: config.nodeCacheTTLSeconds, checkperiod: config.nodeCacheCheckPeriodSeconds });
 const userSessions = {};
 const userLastActivity = {};
@@ -15,24 +15,26 @@ const pool = new Pool({ connectionString: config.PG_DATABASE_URL });
 exports.initializeGame = async () => {
   try {
     const sessionId = generateSessionId();
+
+    let globalVideos = videoCache.get('cachedVideos');
     
-    let videos = videoCache.get('cachedVideos');
-    if (!videos || videos.length < 2) {
-      videos = await fetchAndCacheVideos();
+    if (!globalVideos || globalVideos.length < 2) {
+      globalVideos = await fetchAndCacheVideos();
     }
 
-    const leftVideo = videos.pop();
-    const rightVideo = videos.pop();
+    // Create a separate user queue by copying videos from the global cache
+    const userVideoQueue = [...globalVideos];
 
-    videoCache.set('cachedVideos', videos);
+    const leftVideo = pullRandomVideo(userVideoQueue);
+    const rightVideo = pullRandomVideo(userVideoQueue);
 
-    // Initialize game state for the user
+    // Initialize the game state for the user
     const gameState = {
       sessionId,
       score: 0,
       leftVideo,
       rightVideo,
-      videos
+      userVideoQueue
     };
 
     userSessions[sessionId] = gameState;
@@ -40,42 +42,49 @@ exports.initializeGame = async () => {
 
     console.log(`New session created with Session ID: ${sessionId}`);
 
-    return gameState;
+    return {
+      sessionId,
+      score: gameState.score,
+      leftVideo,
+      rightVideo
+    };
   } catch (error) {
     console.error('Error initializing game:', error.message);
     throw new Error('Failed to initialize game');
   }
 };
 
+// Validate user's guess and update game state
 exports.validateGuess = async (sessionId, guess) => {
   try {
-    // Retrieve the game state
     const gameState = userSessions[sessionId];
+    
     if (!gameState) {
       return { sessionExpired: true };
     }
 
     const { leftVideo, rightVideo } = gameState;
+    if (!leftVideo || !leftVideo.statistics || !rightVideo || !rightVideo.statistics) {
+      throw new Error('Missing statistics data for one or both videos');
+    }
+
     const leftViews = parseInt(leftVideo.statistics.viewCount);
-    const rightViews = rightVideo && rightVideo.statistics ? parseInt(rightVideo.statistics.viewCount) : null;
+    const rightViews = parseInt(rightVideo.statistics.viewCount);
 
-    if (rightViews === null) throw new Error('Invalid right video data');
-
-    let isCorrectGuess = (guess === 'higher' && rightViews >= leftViews) || (guess === 'lower' && rightViews <= leftViews);
+    const isCorrectGuess = (guess === "higher" && rightViews >= leftViews) || (guess === "lower" && rightViews <= leftViews);
 
     if (isCorrectGuess) {
       gameState.score += 1;
       gameState.leftVideo = gameState.rightVideo;
 
-      let newRightVideo = gameState.videos.pop();
-
-      if (!newRightVideo) {
-        const newVideos = await fetchAndCacheVideos();
-        newRightVideo = newVideos.pop();
-        gameState.videos = newVideos;
-      }
-
-      if (!newRightVideo || !newRightVideo.statistics) throw new Error('Failed to fetch a valid right video');
+      let newRightVideo;
+      do {
+        newRightVideo = pullRandomVideo(gameState.userVideoQueue);
+        if (!newRightVideo) {
+          throw new Error('No more videos available in the user’s queue.');
+        }
+        console.log("Pulled New Right Video:", newRightVideo.id);
+      } while (!newRightVideo.statistics);
 
       gameState.rightVideo = newRightVideo;
 
@@ -99,6 +108,65 @@ exports.validateGuess = async (sessionId, guess) => {
     throw new Error('Failed to validate guess');
   }
 };
+
+// Helper function to pull a random video from the user's queue
+function pullRandomVideo(videos) {
+  if (videos.length === 0) return null;
+  const randomIndex = Math.floor(Math.random() * videos.length);
+  return videos[randomIndex];
+}
+
+
+// Fetch and cache videos from YouTube API globally
+async function fetchAndCacheVideos() {
+  console.log('Fetching new videos from YouTube...');
+  const queries = await generateRandomQueries(config.queryAmount);
+  const videoResults = await Promise.all(queries.map(query => fetchVideosForQuery(query)));
+  const allVideos = [].concat(...videoResults);
+
+  if (allVideos.length > 0) {
+    videoCache.set('cachedVideos', allVideos);
+    console.log(`Fetched and cached ${allVideos.length} new videos globally.`);
+    return allVideos;
+  }
+
+  throw new Error('Failed to fetch videos');
+}
+
+// Session Purge Logic (called periodically)
+setInterval(() => {
+  const now = Date.now();
+  Object.keys(userLastActivity).forEach(userId => {
+    if (now - userLastActivity[userId] > config.userQueueTTLMilliseconds) {
+      delete userSessions[userId];
+      delete userLastActivity[userId];
+      console.log(`Purged inactive user session for ${userId}`);
+    }
+  });
+}, 60000);
+
+// Helper function to generate random search queries
+async function generateRandomQueries(count) {
+  try {
+    const response = await axios.get('https://raw.githubusercontent.com/danexrc/dane.lol/main/Website/projects/assets/viewguesser/json/keywords.json');
+    const randomWords = response.data;
+    const queries = [];
+    for (let i = 0; i < count; i++) {
+      const randomQuery = randomWords[Math.floor(Math.random() * randomWords.length)];
+      queries.push(randomQuery);
+    }
+    return queries;
+  } catch (error) {
+    console.error('Error fetching random words from GitHub:', error);
+    throw error;
+  }
+}
+
+// Helper function to generate session ID
+function generateSessionId() {
+  return Math.random().toString(36).substring(2) + Date.now().toString(36);
+}
+
 
 // Add new leaderboard submission with score from backend gamestate
 exports.updateLeaderboard = async (username, sessionId) => {
@@ -139,25 +207,11 @@ exports.updateLeaderboard = async (username, sessionId) => {
   }
 };
 
-// Fetch and cache videos from YouTube API
-async function fetchAndCacheVideos() {
-  console.log('Fetching new videos from YouTube...');
-  const queries = await generateRandomQueries(config.queryAmount);
-  const videoResults = await Promise.all(queries.map(query => fetchVideosForQuery(query)));
-  const allVideos = [].concat(...videoResults);
-
-  if (allVideos.length > 0) {
-    videoCache.set('cachedVideos', allVideos);
-    console.log(`Fetched and cached ${allVideos.length} new videos.`);
-    return allVideos;
-  }
-
-  throw new Error('Failed to fetch videos');
-}
-
 // Fetch videos from YouTube API for a specific query
 async function fetchVideosForQuery(query) {
   try {
+    console.log(`Fetching videos for query: "${query}"`);
+
     const searchResponse = await axios.get('https://www.googleapis.com/youtube/v3/search', {
       params: {
         part: 'snippet',
@@ -188,28 +242,6 @@ async function fetchVideosForQuery(query) {
     console.error(`Error fetching videos for query "${query}":`, error.message);
     return [];
   }
-}
-
-// Helper function to generate random search queries
-async function generateRandomQueries(count) {
-  try {
-    const response = await axios.get('https://raw.githubusercontent.com/danexrc/dane.lol/main/Website/projects/assets/viewguesser/json/keywords.json');
-    const randomWords = response.data;
-    const queries = [];
-    for (let i = 0; i < count; i++) {
-      const randomQuery = randomWords[Math.floor(Math.random() * randomWords.length)];
-      queries.push(randomQuery);
-    }
-    return queries;
-  } catch (error) {
-    console.error('Error fetching random words from GitHub:', error);
-    throw error;
-  }
-}
-
-// Helper function to generate session ID
-function generateSessionId() {
-  return Math.random().toString(36).substring(2) + Date.now().toString(36);
 }
 
 // Fetch top players for leaderboard
