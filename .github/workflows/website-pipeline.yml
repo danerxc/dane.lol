@@ -23,4 +23,4 @@ jobs:
           port: ${{ secrets.SFTP_PORT }}
           local-dir: Website/
           server-dir: ${{ secrets.SFTP_TARGET_DIR }}
-          protocol: sftp
+          protocol: ftps
