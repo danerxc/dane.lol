@@ -295,14 +295,14 @@ function playCorrectGuessSound() {
   setTimeout(function() { 
     var audio = new Audio('assets/viewguesser/sounds/correct.wav');
     audio.play();
-  }, 1400);
+  }, 100);
 }
 
 function playIncorrectGuessSound() {
   setTimeout(function() { 
     var audio = new Audio('assets/viewguesser/sounds/incorrect.wav');
     audio.play();
-  }, 1400);
+  }, 100);
 }
 
 document.getElementById('username').addEventListener('keydown', function(event) {
