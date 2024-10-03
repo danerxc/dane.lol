@@ -293,14 +293,14 @@ function populateRightVideo() {
 
 function playCorrectGuessSound() {
   setTimeout(function() { 
-    var audio = new Audio('assets/viewguesser/sounds/correct.mp3');
+    var audio = new Audio('assets/viewguesser/sounds/correct.wav');
     audio.play();
   }, 1400);
 }
 
 function playIncorrectGuessSound() {
   setTimeout(function() { 
-    var audio = new Audio('assets/viewguesser/sounds/incorrect.mp3');
+    var audio = new Audio('assets/viewguesser/sounds/incorrect.wav');
     audio.play();
   }, 1400);
 }
