@@ -72,22 +72,38 @@ async function submitGuess(guess) {
         }
 
         if (gameState.isCorrect) {
+          playCorrectGuessSound();
           $("#score-counter").html(`<b>Score: ${gameState.score}</b>`);
-
           leftVideo = gameState.leftVideo;
           rightVideo = gameState.rightVideo;
 
           populateLeftVideo();
           populateRightVideo();
 
-          playCorrectGuessSound();
+          
           $("#higherlower-buttons").css("display", "block");
 
         } else {
+          if(gameState.score >= 15) {
+            var randomwinningBackground = _.sample(winningBackgrounds);
+            $(".modal-body").css('background-image', 'linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url("' + randomwinningBackground.backgroundURL + '")')
+            $("#losing-comment").html(randomwinningBackground.endComment)
+            $("#twitter-button").html("<a href=\"https://twitter.com/intent/tweet?text=I%20just%20scored%20" + gameState.score + "%20on%20ViewGuesser.%20Think%20you%20can%20do%20better?%20https://dane.lol/games/viewguesser\" id=\"tweet-button\" class=\"button\"><i class=\"fab fa-twitter\"></i> Tweet</a>")
+          } else if(gameState.score >= 7) {
+            var randomdecentBackground = _.sample(decentBackgrounds);
+            $(".modal-body").css('background-image', 'linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url("' + randomdecentBackground.backgroundURL + '")')
+            $("#losing-comment").html(randomdecentBackground.endComment)
+            $("#twitter-button").html("<a href=\"https://twitter.com/intent/tweet?text=I%20just%20scored%20" + gameState.score + "%20on%20ViewGuesser.%20Think%20you%20can%20do%20better?%20https://dane.lol/games/viewguesser\" id=\"tweet-button\" class=\"button\"><i class=\"fab fa-twitter\"></i> Tweet</a>")
+          } else {
+            var randomlosingBackground = _.sample(losingBackgrounds);
+            $(".modal-body").css('background-image', 'linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url("' + randomlosingBackground.backgroundURL + '")')
+            $("#losing-comment").html(randomlosingBackground.endComment)
+            $("#twitter-button").html("<a href=\"https://twitter.com/intent/tweet?text=I%20just%20scored%20" + gameState.score + "%20on%20ViewGuesser.%20Think%20you%20can%20do%20better?%20https://dane.lol/games/viewguesser\" id=\"tweet-button\" class=\"button\"><i class=\"fab fa-twitter\"></i> Tweet</a>")
+          }
+          playIncorrectGuessSound();
           $("#losing-score").html(gameState.score);
           loadLeaderboard();
           $("#losingModal").modal("show");
-          playIncorrectGuessSound();
         }
       }, 500); // Delay before moving to next video
 
@@ -294,22 +310,5 @@ document.getElementById('username').addEventListener('keydown', function(event) 
     submitScore(); // Call the submitScore function when Enter is pressed
   }
 });
-
-if(gameState.score >= 15) {
-  var randomwinningBackground = _.sample(winningBackgrounds[0]);
-  $(".modal-body").css('background-image', 'linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url("' + randomwinningBackground.backgroundURL + '")')
-  $("#losing-comment").html(randomwinningBackground.endComment)
-  $("#twitter-button").html("<a href=\"https://twitter.com/intent/tweet?text=I%20just%20scored%20" + score + "%20on%20ViewGuesser.%20Think%20you%20can%20do%20better?%20https://dane.lol/games/viewguesser\" id=\"tweet-button\" class=\"button\"><i class=\"fab fa-twitter\"></i> Tweet</a>")
-} else if(gameState.score >= 7) {
-  var randomdecentBackground = _.sample(decentBackgrounds[0]);
-  $(".modal-body").css('background-image', 'linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url("' + randomdecentBackground.backgroundURL + '")')
-  $("#losing-comment").html(randomdecentBackground.endComment)
-  $("#twitter-button").html("<a href=\"https://twitter.com/intent/tweet?text=I%20just%20scored%20" + score + "%20on%20ViewGuesser.%20Think%20you%20can%20do%20better?%20https://dane.lol/games/viewguesser\" id=\"tweet-button\" class=\"button\"><i class=\"fab fa-twitter\"></i> Tweet</a>")
-} else {
-  var randomlosingBackground = _.sample(losingBackgrounds[0]);
-  $(".modal-body").css('background-image', 'linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url("' + randomlosingBackground.backgroundURL + '")')
-  $("#losing-comment").html(randomlosingBackground.endComment)
-  $("#twitter-button").html("<a href=\"https://twitter.com/intent/tweet?text=I%20just%20scored%20" + score + "%20on%20ViewGuesser.%20Think%20you%20can%20do%20better?%20https://dane.lol/games/viewguesser\" id=\"tweet-button\" class=\"button\"><i class=\"fab fa-twitter\"></i> Tweet</a>")
-}
 
 window.onload = loadLeaderboard;
