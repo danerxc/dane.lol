@@ -11,7 +11,7 @@ $(document).ready(function() {
 
 async function initializeGame() {
   try {
-    const response = await fetch('http://localhost:3000/viewguesser/start-game', {
+    const response = await fetch('http://localhost:3500/viewguesser/start-game', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' }
     });
@@ -37,38 +37,41 @@ async function submitGuess(guess) {
   try {
     $("#higherlower-buttons").css("display", "none");
 
-    const response = await fetch('http://localhost:3000/viewguesser/guess', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ sessionId, guess })
-    });
+    if (rightVideo && rightVideo.statistics && rightVideo.statistics.viewCount) {
+      const rightVideoViews = rightVideo.statistics.viewCount;
 
-    const gameState = await response.json();
+      // Display the view count and start the animation
+      $("#right-video-end-viewcount").css("display", "block");
+      $("#right-video-bottom-text").css("display", "none");
+      $("#right-video-bottom-correct-text").css("display", "block");
 
-    console.log('Game State:', gameState);
-
-    if (gameState.sessionExpired) {
-      Swal.fire({
-        title: 'Session Expired',
-        text: 'Your session has expired. Please start a new game.',
-        icon: 'warning',
-        confirmButtonText: 'Start New Game'
-      }).then(() => {
-        window.location.reload(); // Reload the game to start a new session
+      await new Promise((resolve) => {
+        animateViewCount("#right-video-end-viewcount", rightVideoViews, resolve);
       });
-      return;
-    }
 
-    if (gameState.isCorrect) {
-      if (gameState.rightVideo && gameState.rightVideo.statistics && gameState.rightVideo.statistics.viewCount) {
-        const rightVideoViews = gameState.rightVideo.statistics.viewCount;
+      setTimeout(async function () {
+        const response = await fetch('http://localhost:3500/viewguesser/guess', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ sessionId, guess })
+        });
 
-        $("#right-video-end-viewcount").css("display", "block");
-        $("#right-video-bottom-text").css("display", "none");
-        $("#right-video-bottom-correct-text").css("display", "block");
-        animateViewCount("#right-video-end-viewcount", rightVideoViews);
+        const gameState = await response.json();
+        console.log('Game State:', gameState);
 
-        setTimeout(function () {
+        if (gameState.sessionExpired) {
+          Swal.fire({
+            title: 'Session Expired',
+            text: 'Your session has expired. Please start a new game.',
+            icon: 'warning',
+            confirmButtonText: 'Start New Game'
+          }).then(() => {
+            window.location.reload();
+          });
+          return;
+        }
+
+        if (gameState.isCorrect) {
           $("#score-counter").html(`<b>Score: ${gameState.score}</b>`);
 
           leftVideo = gameState.leftVideo;
@@ -80,34 +83,18 @@ async function submitGuess(guess) {
           playCorrectGuessSound();
           $("#higherlower-buttons").css("display", "block");
 
-        }, 1600); // Delay for animation duration (1500ms)
-      } else {
-        throw new Error('Invalid right video data');
-      }
-    } else {
-      if (rightVideo && rightVideo.statistics && rightVideo.statistics.viewCount) {
-        const rightVideoViews = rightVideo.statistics.viewCount;
-
-        $("#right-video-end-viewcount").css("display", "block");
-        $("#right-video-bottom-text").css("display", "none");
-        $("#right-video-bottom-correct-text").css("display", "block");
-        animateViewCount("#right-video-end-viewcount", rightVideoViews);
-
-        setTimeout(function () {
+        } else {
           $("#losing-score").html(gameState.score);
-
           loadLeaderboard();
-
           $("#losingModal").modal("show");
           playIncorrectGuessSound();
-        }, 1600); // Delay for animation duration (1500ms)
-      } else {
-        $("#losing-score").html(gameState.score);
-        loadLeaderboard();
-        $("#losingModal").modal("show");
-        playIncorrectGuessSound();
-      }
+        }
+      }, 500); // Delay before moving to next video
+
+    } else {
+      throw new Error('Invalid right video data');
     }
+
   } catch (error) {
     console.error('Error submitting guess:', error);
 
@@ -146,7 +133,7 @@ async function submitScore() {
   }
 
   try {
-    const response = await fetch('http://localhost:3000/viewguesser/submit', {
+    const response = await fetch('http://localhost:3500/viewguesser/submit', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -199,7 +186,7 @@ async function submitScore() {
 
 async function loadLeaderboard() {
   try {
-    const response = await fetch('http://localhost:3000/viewguesser/leaderboard');
+    const response = await fetch('http://localhost:3500/viewguesser/leaderboard');
     const leaderboard = await response.json();
 
     const leaderboardElement = document.getElementById('leaderboard');
@@ -223,14 +210,17 @@ async function loadLeaderboard() {
   }
 }
 
-function animateViewCount(selector, count) {
+function animateViewCount(selector, count, resolve) {
   $(selector).prop('Counter', 0).animate({
     Counter: count
   }, {
     duration: 1500,
     easing: 'swing',
-    step: function(now) {
-      $(selector).text(Math.ceil(now));
+    step: function (now) {
+      $(selector).text(Math.ceil(now).toLocaleString());
+    },
+    complete: function () {
+      if (resolve) resolve();
     }
   });
 }
@@ -304,5 +294,22 @@ document.getElementById('username').addEventListener('keydown', function(event) 
     submitScore(); // Call the submitScore function when Enter is pressed
   }
 });
+
+if(gameState.score >= 15) {
+  var randomwinningBackground = _.sample(winningBackgrounds[0]);
+  $(".modal-body").css('background-image', 'linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url("' + randomwinningBackground.backgroundURL + '")')
+  $("#losing-comment").html(randomwinningBackground.endComment)
+  $("#twitter-button").html("<a href=\"https://twitter.com/intent/tweet?text=I%20just%20scored%20" + score + "%20on%20ViewGuesser.%20Think%20you%20can%20do%20better?%20https://dane.lol/games/viewguesser\" id=\"tweet-button\" class=\"button\"><i class=\"fab fa-twitter\"></i> Tweet</a>")
+} else if(gameState.score >= 7) {
+  var randomdecentBackground = _.sample(decentBackgrounds[0]);
+  $(".modal-body").css('background-image', 'linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url("' + randomdecentBackground.backgroundURL + '")')
+  $("#losing-comment").html(randomdecentBackground.endComment)
+  $("#twitter-button").html("<a href=\"https://twitter.com/intent/tweet?text=I%20just%20scored%20" + score + "%20on%20ViewGuesser.%20Think%20you%20can%20do%20better?%20https://dane.lol/games/viewguesser\" id=\"tweet-button\" class=\"button\"><i class=\"fab fa-twitter\"></i> Tweet</a>")
+} else {
+  var randomlosingBackground = _.sample(losingBackgrounds[0]);
+  $(".modal-body").css('background-image', 'linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url("' + randomlosingBackground.backgroundURL + '")')
+  $("#losing-comment").html(randomlosingBackground.endComment)
+  $("#twitter-button").html("<a href=\"https://twitter.com/intent/tweet?text=I%20just%20scored%20" + score + "%20on%20ViewGuesser.%20Think%20you%20can%20do%20better?%20https://dane.lol/games/viewguesser\" id=\"tweet-button\" class=\"button\"><i class=\"fab fa-twitter\"></i> Tweet</a>")
+}
 
 window.onload = loadLeaderboard;

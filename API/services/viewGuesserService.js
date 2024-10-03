@@ -128,8 +128,8 @@ exports.updateLeaderboard = async (username, sessionId) => {
 
     console.log(`Cleaning up session ${sessionId}...`);
 
-    delete userSessions[sessionId];  // Ensure this is deleting properly
-    delete userLastActivity[sessionId];  // Ensure this is deleting properly
+    delete userSessions[sessionId];
+    delete userLastActivity[sessionId];  
 
     console.log(`Session ${sessionId} deleted after score submission.`);
     return { message: 'Score submitted successfully' };

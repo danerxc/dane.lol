@@ -1,6 +1,7 @@
 require('dotenv').config();
 
 module.exports = {
+  PORT: process.env.PORT || 3000,
   PG_DATABASE_URL: process.env.PG_DATABASE_URL,
   YOUTUBE_API_KEY: process.env.VIEWGUESSER_YOUTUBE_API_KEY,
   queryAmount: parseInt(process.env.VIEWGUESSER_SEARCH_QUERY_AMOUNT, 10) || 25,  // Default to 25 queries if not set
