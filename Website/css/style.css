@@ -1,0 +1,242 @@
+body {
+    background-color: #ececec;
+}
+
+/* .main-logo {
+    text-align: center;
+    margin-top: 30px;
+    margin-left: 50%;
+} */
+
+.swal2-styled.swal2-confirm {
+    color: black !important;
+}
+.swal2-styled.swal2-deny {
+    color: black !important;
+}
+
+i[class^="icon-"]:before, i[class*=" icon-"]:before {
+    margin: 0;
+  }
+
+.main-logo h1 {
+    background: linear-gradient(to right, #2f8ff7, #ff6ce6);
+    background-size: 200% 200%;
+    animation: rainbow 1s ease-in-out infinite;
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: rgb(0, 0, 0);
+    font-size: 4rem;
+    width: 80vw;
+    margin: 10vh auto;
+    text-align: center;
+    transition: color .2s ease-in-out;
+    text-transform: lowercase;
+    font-weight: 900;
+    margin-bottom: 5px;
+}
+
+.main-logo h1:hover {
+    color: rgba(0, 0, 0, 0);
+}
+
+.main-subheading {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.main-subheading a {
+    text-decoration: none;
+}
+
+@keyframes rainbow {
+    0% {
+        background-position: left
+    }
+
+    50% {
+        background-position: right
+    }
+
+    100% {
+        background-position: left
+    }
+}
+
+.donate-text p {
+    text-decoration: underline; 
+}
+
+.donate-text b {
+    cursor: pointer;
+}
+
+.container {
+    max-width: 1000px;
+}
+
+.card {
+    height: 140px;
+    width: 380px;
+    margin-right: 0px;
+    position:relative;
+    overflow:hidden;
+}
+
+@media screen and (max-width: 380px) {
+    .card {
+        width: 300px;
+    }
+}
+
+@media screen and (max-width: 315px) {
+    .main-logo h1 {
+        font-size: 2rem;
+    }
+    .card {
+        width: 200px;
+    }
+}
+
+@-webkit-keyframes bg-move {
+    0% {
+     background-position:50%
+    }
+    to {
+     background-position:-1000px
+    }
+   }
+   @keyframes bg-move {
+    0% {
+     background-position:50%
+    }
+    to {
+     background-position:-1000px
+    }
+   }
+
+.bg {
+    background-repeat:repeat,no-repeat;
+    background-color:#000000;
+    background-position:0%;
+    background-size:auto 100%;
+    height:200px;
+    width:100%;
+    position:static;
+    left:0;
+    top:0;
+    z-index:1
+}
+
+.bg:hover {
+    -webkit-animation:bg-move 50s linear infinite forwards;
+    animation:bg-move 50s linear infinite forwards;
+}
+
+.link-title {
+    background: #202324;
+    background-color: #202324;
+    background-image: none;
+    padding: 14px 20px;
+    font-weight: 700;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+    white-space: nowrap;
+    font-size: 22px;
+    border-radius: 5px;
+    display: flex;
+    align-items: flex-end;
+    z-index: 2;
+    color: rgb(255, 255, 255) !important;
+}
+
+.link-comingsoon {
+    opacity:0.9;
+    background: #202324;
+    background-color: #202324;
+    background-image: none;
+    padding: 100%;
+    font-weight: 700;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+    white-space: nowrap;
+    font-size: 16px;
+    border-radius: 5px;
+    display: flex;
+    align-items: flex-end;
+    z-index: 2;
+    color: rgb(255, 100, 100) !important;
+}
+
+@media screen and (max-width: 767px) {
+    .card-link {
+        padding-top: 10px;
+    }
+}
+
+footer {
+    text-align: center;
+    margin-top: 40px;
+    padding-right: 10px;
+    padding-left: 10px;
+}
+
+footer p {
+    color: rgb(0, 0, 0);
+}
+
+footer a {
+    text-decoration: none;
+    color: rgb(0, 0, 0);
+}
+
+footer ul {
+    padding: 0px;
+}
+
+.development-buttons li {
+    display:inline;
+}
+
+
+.btn-ft-links {
+    color: #000000;
+    border-color: #000000;
+}
+
+.btn-ft-links:hover {
+    background-color: #4e4e4e;
+    border-color: #000000;
+}
+
+.contact-text {
+    margin-top: 40px;
+}
+
+.donate-ft-link {
+    font-size: 10px;
+    color:rgba(95, 95, 95, 0.514);
+    cursor: pointer;
+}
+
+.donate-ft-link:hover {
+    color: rgb(255, 100, 100);
+}
+
+footer a:hover {
+    color: rgb(255, 100, 100);
+}
+
+.footer-text p {
+    font-size: 12px;
+}
+
+.footer-text a {
+    text-decoration: none !important;
+}
