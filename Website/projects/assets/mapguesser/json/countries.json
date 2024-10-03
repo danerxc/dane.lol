@@ -1,0 +1,292 @@
+{
+    "countries":
+        [{
+            "Name": "Afghanistan",
+             "images": {
+                 "red": "assets/mapguesser/img/countries/afghanistan/afghanistan-blue.svg",
+                 "blue": "assets/mapguesser/img/countries/afghanistan/afghanistan-green.svg",
+                 "green": "assets/mapguesser/img/countries/afghanistan/afghanistan-red.svg",
+                 "yellow": "assets/mapguesser/img/countries/afghanistan/afghanistan-yellow.svg"
+             },
+             "answerimage": "assets/mapguesser/img/countries/afghanistan/afghanistan-black.svg",
+             "hints": [
+                 "Agriculture is the main source of income in the country. It is also rich in natural resources like natural gas and oil.",
+                 "It has been a war-torn country for decades and has been under military influence of many countries.",
+                 "It is a completely landlocked country. The nearest coast lies along the Arabian Sea, about 300 miles (480 km) to the south.",
+                 "They fought three wars with Britain after which they declared themselves independent.",
+                 "The country has been in news more than any other country in the last decade.",
+                 "The Taliban have retaken control of the country nearly two decades after they were driven out of its capital by US troops.",
+                 "The people of the country celebrate their new year on the 21st March each year, the first day of spring.",
+                 "The country has high levels of terrorism, poverty, and child malnutrition.",
+                 "It has an estimated population in 2021 of 40,218,234.",
+                 "Tall mountains and dry deserts cover most of the landscape of the country."
+             ],
+             "utterances" : [
+                "afghanistan"
+            ]
+        },
+        {
+            "Name": "Albania",
+             "images": {
+                 "red": "assets/mapguesser/img/countries/albania/albania-blue.svg",
+                 "blue": "assets/mapguesser/img/countries/albania/albania-green.svg",
+                 "green": "assets/mapguesser/img/countries/albania/albania-red.svg",
+                 "yellow": "assets/mapguesser/img/countries/albania/albania-yellow.svg"
+             },
+             "answerimage": "assets/mapguesser/img/countries/albania/albania-black.svg",
+             "hints": [
+                 "is a small country in Southern Europe.",
+                 "There are only 3 million people that live in the country.",
+                 "There are more people now living outside the country than within its territories.",
+                 "The majority of people are Muslim. This is because the country had been under Ottoman rule.",
+                 "The highest point in the country is Mount Korab, which is 2,764 metres high. The mountain is shared with two other countries.",
+                 "The country's internet is among the fastest and cheapest in Europe.",
+                 "It is known as one of Europe's most “at-risk” countries for natural disasters, especially flooding.",
+                 "The most popular car model is Mercedes-Benz and they are seen everywhere in the country.",
+                 "There are no McDonalds restaurants at all in the country as there would be a huge cultural push back on the idea.",
+                 "70% of the country is covered in mountainous terrain."
+             ],
+             "utterances" : [
+                "albania"
+            ]
+        },
+        {
+            "Name": "Algeria",
+             "images": {
+                 "red": "assets/mapguesser/img/countries/algeria/algeria-blue.svg",
+                 "blue": "assets/mapguesser/img/countries/algeria/algeria-green.svg",
+                 "green": "assets/mapguesser/img/countries/algeria/algeria-red.svg",
+                 "yellow": "assets/mapguesser/img/countries/algeria/algeria-yellow.svg"
+             },
+             "answerimage": "assets/algeria/algeria-black.svg",
+             "hints": [
+                 "It is a North African country with a Mediterranean coastline and a Saharan desert interior.",
+                 "It is the largest african nation, spread across more than 2 million square kilometres.",
+                 "The Sahara desert makes up more than four-fifths of the country's area.",
+                 "Due to the country's size, the population is thinly spread. 91% of the population lives along the Mediterranean coast on just 12% of the country’s total landmass.",
+                 "The country's national animal is the fennec fox. The fennec is the world's smallest fox.",
+                 "In 2019, it became only the second African country to be officially recognized as malaria-free, following Mauritius in 1973.",
+                 "Around 99% of the people are Muslim, predominantly Sunni.",
+                 "There is an estimated population in 2021 of 44,700,000.",
+                 "The country is heavily reliant on energy exports in natural gas and oil. However, it faces many economic challenges, including high unemployment for women and youth.",
+                 "The country was born in 1962 when it gained independence from France following an eight-year war."
+             ],
+             "utterances" : [
+                "algeria"
+            ]
+        },
+        {
+            "Name": "Andorra",
+             "images": {
+                 "red": "assets/mapguesser/img/countries/andorra/andorra-blue.svg",
+                 "blue": "assets/mapguesser/img/countries/andorra/andorra-green.svg",
+                 "green": "assets/mapguesser/img/countries/andorra/andorra-red.svg",
+                 "yellow": "assets/mapguesser/img/countries/andorra/andorra-yellow.svg"
+             },
+             "answerimage": "assets/mapguesser/img/countries/andorra/andorra-black.svg",
+             "hints": [
+                 "It is a tiny, independent principality situated in the Pyrenees mountains in Europe.",
+                 "It's known for its ski resorts and a tax-haven status that encourages duty-free shopping.",
+                 "It's the 16th smallest country in the world by land, and the 11th smallest by population. It is only about a 40km drive from one side of the country to the other.",
+                 "It is the world's only co-principality. They have two princes who jointly share the title of prince.",
+                 "It is the only country in the world with Catalan as its official language.",
+                 "The country is not part of the EU, EFTA, or the Eurozone",
+                 "The country's flag is strikingly similar to the flags of Chad, Romania, and Moldova.",
+                 "The country was late in joining the United Nations. Only joining in 1993, 48 years after the UN was formed.",
+                 "The country is heavily reliant on energy exports in natural gas and oil. However, it faces many economic challenges, including high unemployment for women and youth.",
+                 "The country was born in 1962 when it gained independence from France following an eight-year war."
+             ],
+             "utterances" : [
+                "andorra"
+            ]
+        },
+        {
+            "Name": "Angola",
+             "images": {
+                 "red": "assets/mapguesser/img/countries/angola/angola-blue.svg",
+                 "blue": "assets/mapguesser/img/countries/angola/angola-green.svg",
+                 "green": "assets/mapguesser/img/countries/angola/angola-red.svg",
+                 "yellow": "assets/mapguesser/img/countries/angola/angola-yellow.svg"
+             },
+             "answerimage": "assets/mapguesser/img/countries/angola/angola-black.svg",
+             "hints": [
+                 "It is an oil and diamond-rich country.",
+                 "After the country gained independence, they went through a long period of civil war.",
+                 "Despite being an African country, Portuguese is the country's official language.",
+                 "The country's flag is a horizontal bicolor of red and black with a yellow emblem in the center. The emblem consists of a five pointed-star within a half gear wheel crossed by a machete.",
+                 "It is the seventh largest country in Africa with an estimated population of 31,127,674 in 2020.",
+                 "Its economy is among the fastest growing in the world, especially since the cessation of the civil war.",
+                 "It is a country in Southern Africa.",
+                 "Mount Moco, at 2,620 meters (8,600 feet), is the highest mountain in the country.",
+                 "Nearly 70% of the population is under 24 years old, the war caused significant impact on the composition of youth vs elderly.",
+                 "The country gets its name from the ancient Kingdom of Ndongo, whose kings carried the title of “ngola.”"
+             ],
+             "utterances" : [
+                "angola",
+                "republic of angola",
+                "republic angola"
+
+            ]
+        },
+        {
+            "Name": "Antigua & Barbuda",
+             "images": {
+                 "red": "assets/mapguesser/img/countries/antigua_and_barbuda/antiguabarbuda-blue.svg",
+                 "blue": "assets/mapguesser/img/countries/antigua_and_barbuda/antiguabarbuda-green.svg",
+                 "green": "assets/mapguesser/img/countries/antigua_and_barbuda/antiguabarbuda-red.svg",
+                 "yellow": "assets/mapguesser/img/countries/antigua_and_barbuda/antiguabarbuda-yellow.svg"
+             },
+             "answerimage": "assets/mapguesser/img/countries/antigua_and_barbuda/antiguabarbuda-black.svg",
+             "hints": [
+                 "It is a is a Caribbean island, with white-sand beaches, tropical vegetation, and rich cultural heritage.",
+                 "It is an ex-British Colony which became an independent state within the Commonwealth of Nations on 1 November 1981. ",
+                 "is now one of the most demanded all-inclusive destinations among the Caribbean islands, especially preferred by honeymooners and couples for a romantic getaway.",
+                 "The country's local official language is English, because of the British colonization.",
+                 "The highest peak in the country is Mount Obama, at only 402 m (1,319 ft) tall. It was renamed in 2009 in honor of the 44th U.S. President Barack Obama.",
+                 "Its economy is among the fastest growing in the world, especially since the cessation of the civil war.",
+                 "It is a country in Southern Africa.",
+                 "The country drives on the left, as it is part of the Commonwealth.",
+                 "The currency is the East Caribbean dollar (XCD).",
+                 "The country has one of the most recognizable flags in the world. It consists of black, blue & white with a yellow half-sun with nine rays."
+             ],
+             "utterances" : [
+                "antigua and barbuda",
+                "antigua & barbuda",
+                "andtiguaandbarbuda",
+                "antigua&barbuda",
+                "antigua barbuda",
+                "antiguabarbuda"
+
+            ]
+        },
+        {
+            "Name": "Argentina",
+             "images": {
+                 "red": "assets/mapguesser/img/countries/argentina/argentina-blue.svg",
+                 "blue": "assets/mapguesser/img/countries/argentina/argentina-green.svg",
+                 "green": "assets/mapguesser/img/countries/argentina/argentina-red.svg",
+                 "yellow": "assets/mapguesser/img/countries/argentina/argentina-yellow.svg"
+             },
+             "answerimage": "assets/mapguesser/img/countries/argentina/argentina-black.svg",
+             "hints": [
+                 "It is a country in the southern half of South America and is the second largest behind Brazil.",
+                 "The country flag is blue and white triband, with a yellow sun in the centre.",
+                 "is considered one of the safest countries in South America.",
+                 "Following three centuries of Spanish colonization, the country declared independence in 1816",
+                 "It was the first country in South America to legalise gay marriage in July 2010, which included full adoption rights.",
+                 "The country is considered \"the land of silver\", which it is named after.",
+                 "The dance move \"tango\" is very popular within the country.",
+                 "95% of the country's population are of European descent, mostly from Italy, Spain and Germany.",
+                 "The country's main industry is agriculture, and they export many different foods around the world, such as beef, citrus fruits, soybeans and corn.",
+                 "Football (soccer) is the favorite sport in the country, with many famous players originating from there."
+             ],
+             "utterances" : [
+                "argentina",
+                "argentine",
+                "argentine republic",
+                "argentinerepublic",
+                "republic of argentina",
+                "republicofargentina",
+                "republic argentina",
+                "republicargentina",
+                "republic of argentine",
+                "republicofargentine",
+                "republicargentine"
+
+            ]
+        },
+        {
+            "Name": "Armenia",
+             "images": {
+                 "red": "assets/mapguesser/img/countries/armenia/armenia-blue.svg",
+                 "blue": "assets/mapguesser/img/countries/armenia/armenia-green.svg",
+                 "green": "assets/mapguesser/img/countries/armenia/armenia-red.svg",
+                 "yellow": "assets/mapguesser/img/countries/armenia/armenia-yellow.svg"
+             },
+             "answerimage": "assets/mapguesser/img/countries/armenia/armenia-black.svg",
+             "hints": [
+                 "It is a nation, and former Soviet republic, in the mountainous Caucasus region between Asia and Europe.",
+                 "More of the country's population live abroad than in the country, when they fled in 1915. They established strong communities in the US, Russia and France.",
+                 "The country suffered a genocide in 1915 that resulted in the deaths of more than a million people. The country marked the 100th anniversary on April 24th, 2015.",
+                 "Mount Ararat is the symbol of the country. It is depicted on their emblem.",
+                 "It is a land of rugged mountains and extinct volcanoes. Its highest point, Mount Aragats stands at 13,435 ft (4,095 m).",
+                 "The country is rumored to be the first to adopt Christianity in 301 A.D.",
+                 "A lot of Lada's can be found in the country, going back to its Soviet roots.",
+                 "The country has numerous iconic monasteries and churches, and these religious buildings are popular tourist sites.",
+                 "The country is home to one of the world's oldest cities, Yerevan, which was constructed before Rome.",
+                 "The country is said to produce some of the best and oldest wines. Soviet Ruler Joseph Stalin bought cases of wine from the country and presented them to Winston Churchill as a gift during World War II."
+             ],
+             "utterances" : [
+                "armenia",
+                "republic of armenia",
+                "republicofarmenia",
+                "republic armenia",
+                "republicarmenia"
+
+            ]
+        },
+        {
+        "Name": "North America",
+         "images": {
+             "red": "assets/mapguesser/img/countries/america/na-blue.svg",
+             "blue": "assets/mapguesser/img/countries/america/na-green.svg",
+             "green": "assets/mapguesser/img/countries/america/na-red.svg",
+             "yellow": "assets/mapguesser/img/countries/america/na-yellow.svg"
+         },
+         "answerimage": "assets/mapguesser/img/countries/america/na-black.svg",
+         "hints": [
+             "This country has a population of over 300M",
+             "Tipping is really important in this country when paying for something",
+             "It takes about 45 hours to drive across the country"
+         ],
+         "utterances" : [
+             "north america",
+             "northamerica",
+             "n america",
+             "namerica",
+             "na",
+             "united states",
+             "united states america",
+             "united states of america"
+         ]
+        },
+        {
+            "Name": "United Kingdom",
+             "images": {
+                 "red": "assets/mapguesser/img/countries/uk/uk-blue.svg",
+                 "blue": "assets/mapguesser/img/countries/uk/uk-green.svg",
+                 "green": "assets/mapguesser/img/countries/uk/uk-red.svg",
+                 "yellow": "assets/mapguesser/img/countries/uk/uk-yellow.svg"
+             },
+             "answerimage": "assets/mapguesser/img/countries/uk/uk-black.svg",
+             "hints": [
+                 "This country is one of the founding members of the European Union",
+                 "This country is known for its rich history",
+                 "It consists of four different countries"
+             ],
+             "utterances" : [
+                "united kingdom",
+                "unitedkingdom",
+                "ukingdom",
+                "uk"
+            ]
+        },
+        {
+            "Name": "Japan",
+             "images": {
+                 "red": "assets/mapguesser/img/countries/japan/japan-blue.svg",
+                 "blue": "assets/mapguesser/img/countries/japan/japan-green.svg",
+                 "green": "assets/mapguesser/img/countries/japan/japan-red.svg",
+                 "yellow": "assets/mapguesser/img/countries/japan/japan-yellow.svg"
+             },
+             "answerimage": "assets/mapguesser/img/countries/japan/japan-black.svg",
+             "hints": [
+                 "It has the 11th largest population in the world",
+                 "This country has one of the best life-expectancy rates in the world",
+                 "Nearly half the zippers used in the world are made here"
+             ],
+             "utterances" : [
+                "japan"
+            ]
+        }]
+}
