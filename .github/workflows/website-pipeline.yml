@@ -1,0 +1,34 @@
+name: Deploy Website to Server
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'Website/**'
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Install SSH Client
+        run: sudo apt-get install -y sshpass
+
+      - name: Deploy files via SFTP
+        env:
+          SFTP_HOST: ${{ secrets.SFTP_HOST }}
+          SFTP_PORT: ${{ secrets.SFTP_PORT }}
+          SFTP_USER: ${{ secrets.SFTP_USER }}
+          SFTP_PASSWORD: ${{ secrets.SFTP_PASSWORD }}
+          REMOTE_PATH: ${{ secrets.SFTP_REMOTE_PATH }}
+        run: |
+          sshpass -p "$SFTP_PASSWORD" sftp -o StrictHostKeyChecking=no -P $SFTP_PORT $SFTP_USER@$SFTP_HOST <<EOF
+          cd $REMOTE_PATH
+          lcd Website
+          mput -r *
+          bye
+          EOF
