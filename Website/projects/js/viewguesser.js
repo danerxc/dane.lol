@@ -5,7 +5,7 @@ let losingBackgrounds = [];
 let decentBackgrounds = [];
 let winningBackgrounds = [];
 
-$(document).ready(function() {
+$(document).ready(function () {
   initializeGame();
 });
 
@@ -74,31 +74,56 @@ async function submitGuess(guess) {
         if (gameState.isCorrect) {
           playCorrectGuessSound();
           $("#score-counter").html(`<b>Score: ${gameState.score}</b>`);
+      
+          const vsIconElement = document.querySelector('.vs-icon');
+          const checkIcon = vsIconElement.querySelector('i');
+          const checkIconSVG = vsIconElement.querySelector('svg');
+          const vsText = vsIconElement.querySelector('h1');
+      
+          vsIconElement.classList.add('correct');
+      
+          if (checkIconSVG) {
+              checkIconSVG.style.display = 'block';
+          } else if (checkIcon) {
+              checkIcon.style.display = 'block';
+          }
+      
+          vsText.style.display = 'none';
+      
+          setTimeout(() => {
+              vsIconElement.classList.remove('correct');
+              if (checkIconSVG) {
+                  checkIconSVG.style.display = 'none';
+              } else if (checkIcon) {
+                  checkIcon.style.display = 'none';
+              }
+              vsText.style.display = 'block';
+          }, 1500);
+      
           leftVideo = gameState.leftVideo;
           rightVideo = gameState.rightVideo;
-
           populateLeftVideo();
           populateRightVideo();
-
-          
+      
           $("#higherlower-buttons").css("display", "block");
 
         } else {
-          if(gameState.score >= 15) {
-            var randomwinningBackground = _.sample(winningBackgrounds);
-            $(".modal-body").css('background-image', 'linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url("' + randomwinningBackground.backgroundURL + '")')
-            $("#losing-comment").html(randomwinningBackground.endComment)
-            $("#twitter-button").html("<a href=\"https://twitter.com/intent/tweet?text=I%20just%20scored%20" + gameState.score + "%20on%20ViewGuesser.%20Think%20you%20can%20do%20better?%20https://dane.lol/games/viewguesser\" id=\"tweet-button\" class=\"button\"><i class=\"fab fa-twitter\"></i> Tweet</a>")
-          } else if(gameState.score >= 7) {
-            var randomdecentBackground = _.sample(decentBackgrounds);
-            $(".modal-body").css('background-image', 'linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url("' + randomdecentBackground.backgroundURL + '")')
-            $("#losing-comment").html(randomdecentBackground.endComment)
-            $("#twitter-button").html("<a href=\"https://twitter.com/intent/tweet?text=I%20just%20scored%20" + gameState.score + "%20on%20ViewGuesser.%20Think%20you%20can%20do%20better?%20https://dane.lol/games/viewguesser\" id=\"tweet-button\" class=\"button\"><i class=\"fab fa-twitter\"></i> Tweet</a>")
+          // Handle incorrect guess logic
+          if (gameState.score >= 15) {
+            const randomWinningBackground = _.sample(winningBackgrounds);
+            $(".modal-body").css('background-image', 'linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url("' + randomWinningBackground.backgroundURL + '")');
+            $("#losing-comment").html(randomWinningBackground.endComment);
+            $("#twitter-button").html("<a href=\"https://twitter.com/intent/tweet?text=I%20just%20scored%20" + gameState.score + "%20on%20ViewGuesser.%20Think%20you%20can%20do%20better?%20https://dane.lol/games/viewguesser\" id=\"tweet-button\" class=\"button\"><i class=\"fab fa-twitter\"></i> Tweet</a>");
+          } else if (gameState.score >= 7) {
+            const randomDecentBackground = _.sample(decentBackgrounds);
+            $(".modal-body").css('background-image', 'linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url("' + randomDecentBackground.backgroundURL + '")');
+            $("#losing-comment").html(randomDecentBackground.endComment);
+            $("#twitter-button").html("<a href=\"https://twitter.com/intent/tweet?text=I%20just%20scored%20" + gameState.score + "%20on%20ViewGuesser.%20Think%20you%20can%20do%20better?%20https://dane.lol/games/viewguesser\" id=\"tweet-button\" class=\"button\"><i class=\"fab fa-twitter\"></i> Tweet</a>");
           } else {
-            var randomlosingBackground = _.sample(losingBackgrounds);
-            $(".modal-body").css('background-image', 'linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url("' + randomlosingBackground.backgroundURL + '")')
-            $("#losing-comment").html(randomlosingBackground.endComment)
-            $("#twitter-button").html("<a href=\"https://twitter.com/intent/tweet?text=I%20just%20scored%20" + gameState.score + "%20on%20ViewGuesser.%20Think%20you%20can%20do%20better?%20https://dane.lol/games/viewguesser\" id=\"tweet-button\" class=\"button\"><i class=\"fab fa-twitter\"></i> Tweet</a>")
+            const randomLosingBackground = _.sample(losingBackgrounds);
+            $(".modal-body").css('background-image', 'linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url("' + randomLosingBackground.backgroundURL + '")');
+            $("#losing-comment").html(randomLosingBackground.endComment);
+            $("#twitter-button").html("<a href=\"https://twitter.com/intent/tweet?text=I%20just%20scored%20" + gameState.score + "%20on%20ViewGuesser.%20Think%20you%20can%20do%20better?%20https://dane.lol/games/viewguesser\" id=\"tweet-button\" class=\"button\"><i class=\"fab fa-twitter\"></i> Tweet</a>");
           }
           playIncorrectGuessSound();
           $("#losing-score").html(gameState.score);
@@ -266,7 +291,13 @@ function populateLeftVideo() {
   const leftTitle = leftVideo.snippet.title;
   const leftCreator = leftVideo.snippet.channelTitle;
   const leftViews = leftVideo.statistics.viewCount;
-  const leftThumbnail = leftVideo.snippet.thumbnails.high.url;
+  
+  // Attempt to load maxres, fallback to high if it doesn't exist
+  const leftMaxresThumbnail = leftVideo.snippet.thumbnails.maxres?.url;
+  const leftHighThumbnail = leftVideo.snippet.thumbnails.high?.url;
+
+  // Start with maxres, then fallback to high if maxres doesn't exist
+  const leftThumbnail = leftMaxresThumbnail || leftHighThumbnail || '';
 
   $("#left-video-title").html(`<b>${leftTitle}</b>`);
   $("#left-video-subheading").html(`by <span style="color: red;">${leftCreator}</span> currently has`);
@@ -278,7 +309,13 @@ function populateRightVideo() {
   const rightTitle = rightVideo.snippet.title;
   const rightCreator = rightVideo.snippet.channelTitle;
   const comparisonVideo = leftVideo.snippet.title;
-  const rightThumbnail = rightVideo.snippet.thumbnails.high.url;
+
+  // Attempt to load maxres, fallback to high if it doesn't exist
+  const rightMaxresThumbnail = rightVideo.snippet.thumbnails.maxres?.url;
+  const rightHighThumbnail = rightVideo.snippet.thumbnails.high?.url;
+
+  // Start with maxres, then fallback to high if maxres doesn't exist
+  const rightThumbnail = rightMaxresThumbnail || rightHighThumbnail || '';
 
   $("#higherlower-buttons").css("display", "block");
   $("#right-video-bottom-text").css("display", "block");
@@ -292,20 +329,20 @@ function populateRightVideo() {
 }
 
 function playCorrectGuessSound() {
-  setTimeout(function() { 
+  setTimeout(function () {
     var audio = new Audio('assets/viewguesser/sounds/correct.wav');
     audio.play();
   }, 100);
 }
 
 function playIncorrectGuessSound() {
-  setTimeout(function() { 
+  setTimeout(function () {
     var audio = new Audio('assets/viewguesser/sounds/incorrect.wav');
     audio.play();
   }, 100);
 }
 
-document.getElementById('username').addEventListener('keydown', function(event) {
+document.getElementById('username').addEventListener('keydown', function (event) {
   if (event.key === 'Enter') {
     submitScore(); // Call the submitScore function when Enter is pressed
   }
