@@ -153,12 +153,11 @@
         margin-left: 25%;
     }
 
-/* VS Icon Styling */
 .vs-icon {
     position: absolute;
     top: 50%;
-    left: 50%; /* Centering horizontally */
-    transform: translate(-50%, -50%); /* Offset to ensure perfect centering */
+    left: 50%;
+    transform: translate(-50%, -50%);
     width: 100%;
     text-align: center;
     z-index: 5;
@@ -201,12 +200,20 @@
     color: white;
 }
 
-/* Hide the "VS" text when correct */
-.vs-icon.correct h1 {
+.vs-icon.incorrect .circle svg {
+    display: block !important;
+    color: white;
+}
+
+.vs-icon.incorrect .circle i {
+    display: block !important;
+    color: white;
+}
+
+.vs-icon.correct h1, .vs-icon.incorrect h1 {
     display: none !important;
 }
 
-/* The overlay for the animation */
 .circle::after {
     content: '';
     position: absolute;
@@ -221,18 +228,14 @@
 
 .vs-icon.correct .circle::after {
     top: 0;
+    background-color: green;
 }
 
-.vs-icon.correct i {
-    display: block;
-    color: white;
+.vs-icon.incorrect .circle::after {
+    top: 0;
+    background-color: red;
 }
 
-.vs-icon.correct h1 {
-    display: none;
-}
-
-/* Adjustments for smaller screens */
 @media screen and (max-width: 992px) {
     .vs-icon {
         top: 50%;
