@@ -155,10 +155,10 @@
 
 /* VS Icon Styling */
 .vs-icon {
-    left: 0;
     position: absolute;
     top: 50%;
-    transform: translateY(-50%);
+    left: 50%; /* Centering horizontally */
+    transform: translate(-50%, -50%); /* Offset to ensure perfect centering */
     width: 100%;
     text-align: center;
     z-index: 5;
@@ -196,15 +196,14 @@
     color: white;
 }
 
-/* When the correct class is added, show the <i> tag as a fallback */
 .vs-icon.correct .circle i {
-    display: block !important; /* Show the <i> tag if the SVG is not rendered */
+    display: block !important;
     color: white;
 }
 
 /* Hide the "VS" text when correct */
 .vs-icon.correct h1 {
-    display: none !important; /* Hide VS text when correct */
+    display: none !important;
 }
 
 /* The overlay for the animation */
@@ -216,17 +215,16 @@
     width: 100%;
     height: 100%;
     background-color: green;
-    transition: top 0.5s ease; /* Duration of the color fill animation */
-    z-index: -1; /* Make sure it doesn't block the content */
+    transition: top 0.5s ease;
+    z-index: -1;
 }
 
-/* Trigger the animation on correct guess */
 .vs-icon.correct .circle::after {
-    top: 0; /* Animate the green color filling from the bottom */
+    top: 0;
 }
 
 .vs-icon.correct i {
-    display: block; /* Show the checkmark when correct */
+    display: block;
     color: white;
 }
 
@@ -237,20 +235,15 @@
 /* Adjustments for smaller screens */
 @media screen and (max-width: 992px) {
     .vs-icon {
-        left: 0;
-        margin-top: -25px;
         top: 50%;
-        width: 100%;
-        text-align: center;
-        z-index: 5;
-        pointer-events: none;
+        left: 50%;
+        transform: translate(-50%, -50%);
     }
 
     .circle {
-        width: 100px;
-        height: 100px;
+        width: 70px;
+        height: 70px;
         font-size: 32px;
-        z-index: 10;
     }
 
     .circle i {
@@ -258,6 +251,23 @@
     }
 }
 
+@media screen and (max-width: 576px) {
+    .vs-icon {
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+
+    .circle {
+        width: 60px;
+        height: 60px;
+        font-size: 28px;
+    }
+
+    .circle i {
+        font-size: 20px;
+    }
+}
 
     .higherlower-btn {
         cursor: pointer;
