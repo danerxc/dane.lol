@@ -11,7 +11,7 @@ $(document).ready(function () {
 
 async function initializeGame() {
   try {
-    const response = await fetch('/api/viewguesser/start-game', {
+    const response = await fetch('http://localhost:3000/viewguesser/start-game', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' }
     });
@@ -49,7 +49,7 @@ async function submitGuess(guess) {
       });
 
       setTimeout(async function () {
-        const response = await fetch('/api/viewguesser/guess', {
+        const response = await fetch('http://localhost:3000/viewguesser/guess', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ sessionId, guess })
@@ -123,17 +123,17 @@ async function submitGuess(guess) {
               const randomWinningBackground = _.sample(winningBackgrounds);
               $(".modal-body").css('background-image', 'linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url("' + randomWinningBackground.backgroundURL + '")');
               $("#losing-comment").html(randomWinningBackground.endComment);
-              $("#twitter-button").html("<a href=\"https://twitter.com/intent/tweet?text=I%20just%20scored%20" + gameState.score + "%20on%20ViewGuesser.%20Think%20you%20can%20do%20better?%20https://dane.lol/games/viewguesser\" id=\"tweet-button\" class=\"button\"><i class=\"fab fa-twitter\"></i> Tweet</a>");
+              $("#twitter-button").html("<a href=\"https://twitter.com/intent/tweet?text=I%20just%20scored%20" + gameState.score + "%20on%20ViewGuesser.%20Think%20you%20can%20do%20better?%20https://dane.lol/viewguesser\" id=\"tweet-button\" class=\"button\"><i class=\"fa-brands fa-x-twitter\"></i> Post</a>");
             } else if (gameState.score >= 7) {
               const randomDecentBackground = _.sample(decentBackgrounds);
               $(".modal-body").css('background-image', 'linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url("' + randomDecentBackground.backgroundURL + '")');
               $("#losing-comment").html(randomDecentBackground.endComment);
-              $("#twitter-button").html("<a href=\"https://twitter.com/intent/tweet?text=I%20just%20scored%20" + gameState.score + "%20on%20ViewGuesser.%20Think%20you%20can%20do%20better?%20https://dane.lol/games/viewguesser\" id=\"tweet-button\" class=\"button\"><i class=\"fab fa-twitter\"></i> Tweet</a>");
+              $("#twitter-button").html("<a href=\"https://twitter.com/intent/tweet?text=I%20just%20scored%20" + gameState.score + "%20on%20ViewGuesser.%20Think%20you%20can%20do%20better?%20https://dane.lol/viewguesser\" id=\"tweet-button\" class=\"button\"><i class=\"fa-brands fa-x-twitter\"></i> Post</a>");
             } else {
               const randomLosingBackground = _.sample(losingBackgrounds);
               $(".modal-body").css('background-image', 'linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url("' + randomLosingBackground.backgroundURL + '")');
               $("#losing-comment").html(randomLosingBackground.endComment);
-              $("#twitter-button").html("<a href=\"https://twitter.com/intent/tweet?text=I%20just%20scored%20" + gameState.score + "%20on%20ViewGuesser.%20Think%20you%20can%20do%20better?%20https://dane.lol/games/viewguesser\" id=\"tweet-button\" class=\"button\"><i class=\"fab fa-twitter\"></i> Tweet</a>");
+              $("#twitter-button").html("<a href=\"https://twitter.com/intent/tweet?text=I%20just%20scored%20" + gameState.score + "%20on%20ViewGuesser.%20Think%20you%20can%20do%20better?%20https://dane.lol/viewguesser\" id=\"tweet-button\" class=\"button\"><i class=\"fa-brands fa-x-twitter\"></i> Post</a>");
             }
 
             $("#losing-score").html(gameState.score);
@@ -186,7 +186,7 @@ async function submitScore() {
   }
 
   try {
-    const response = await fetch('/api/viewguesser/submit', {
+    const response = await fetch('http://localhost:3000/viewguesser/submit', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -239,7 +239,7 @@ async function submitScore() {
 
 async function loadLeaderboard() {
   try {
-    const response = await fetch('/api/viewguesser/leaderboard');
+    const response = await fetch('http://localhost:3000/viewguesser/leaderboard');
     const leaderboard = await response.json();
 
     const leaderboardElement = document.getElementById('leaderboard');
