@@ -11,7 +11,7 @@ $(document).ready(function () {
 
 async function initializeGame() {
   try {
-    const response = await fetch('http://localhost:3000/viewguesser/start-game', {
+    const response = await fetch('/api/viewguesser/start-game', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' }
     });
@@ -49,7 +49,7 @@ async function submitGuess(guess) {
       });
 
       setTimeout(async function () {
-        const response = await fetch('http://localhost:3000/viewguesser/guess', {
+        const response = await fetch('/api/viewguesser/guess', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ sessionId, guess })
@@ -186,7 +186,7 @@ async function submitScore() {
   }
 
   try {
-    const response = await fetch('http://localhost:3000/viewguesser/submit', {
+    const response = await fetch('/api/viewguesser/submit', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -239,7 +239,7 @@ async function submitScore() {
 
 async function loadLeaderboard() {
   try {
-    const response = await fetch('http://localhost:3000/viewguesser/leaderboard');
+    const response = await fetch('/api/viewguesser/leaderboard');
     const leaderboard = await response.json();
 
     const leaderboardElement = document.getElementById('leaderboard');
