@@ -26,10 +26,26 @@ if (!process.env.PG_DATABASE_URL) {
 // Serve static files from the 'public' directory
 app.use(express.static(path.join(__dirname, 'public')));
 
+// Middleware to dynamically serve .html files without the extension
+app.use((req, res, next) => {
+  if (!path.extname(req.url)) {
+    const htmlFilePath = path.join(__dirname, 'public', `${req.url}.html`);
+    
+    res.sendFile(htmlFilePath, (err) => {
+      if (err) {
+        next();
+      }
+    });
+  } else {
+    next();
+  }
+});
+
 // API routes
 const viewGuesserRoutes = require('./routes/viewGuesserRoutes');
 app.use('/api/viewguesser', viewGuesserRoutes);
 
+// Catch-all route for client-side routing (for SPAs)
 app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
