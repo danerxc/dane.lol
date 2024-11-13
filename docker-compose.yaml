@@ -1,0 +1,44 @@
+version: '3'
+services:
+  dane.lol:
+    image: ghcr.io/danexrc/danexrc/dane.lol:latest
+    container_name: dane.lol
+    restart: unless-stopped
+    environment:
+      - PG_DATABASE_URL=postgres://$POSTGRES_USER:$POSTGRES_PASSWORD@postgres:5432/yourdatabase
+      - VIEWGUESSER_YOUTUBE_API_KEY=$VIEWGUESSER_YOUTUBE_API_KEY
+      - VIEWGUESSER_SEARCH_QUERY_AMOUNT=$VIEWGUESSER_SEARCH_QUERY_AMOUNT
+      - VIEWGUESSER_NODE_CACHE_TTL_SECONDS=$VIEWGUESSER_NODE_CACHE_TTL_SECONDS
+      - VIEWGUESSER_USER_QUEUE_TTL_MILLISECONDS=$VIEWGUESSER_USER_QUEUE_TTL_MILLISECONDS
+      - VIEWGUESSER_NODE_CACHE_CHECK_PERIOD_SECONDS=$VIEWGUESSER_NODE_CACHE_CHECK_PERIOD_SECONDS
+      - VIEWGUESSER_JWT_SECRET=$VIEWGUESSER_JWT_SECRET
+      - VIEWGUESSER_BLOCK_DURATION_MILLISECONDS=$VIEWGUESSER_BLOCK_DURATION_MILLISECONDS
+    ports:
+      - "3000:3000"
+    depends_on:
+      - postgres
+    networks:
+      - web
+
+  postgres:
+    image: postgres:16-bullseye
+    hostname: postgresql
+    container_name: postgresql
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: $POSTGRES_USER
+      POSTGRES_PASSWORD: $POSTGRES_PASSWORD
+      POSTGRES_DB: $DATABASE_NAME
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+      - ./sql/schema.sql:/docker-entrypoint-initdb.d/schema.sql
+    restart: unless-stopped
+    networks:
+      - web
+
+volumes:
+  pgdata:
+  
+networks:
+  web:
