@@ -148,7 +148,7 @@ setInterval(() => {
 // Helper function to generate random search queries
 async function generateRandomQueries(count) {
   try {
-    const response = await axios.get('https://raw.githubusercontent.com/danexrc/dane.lol/main/Website/projects/assets/viewguesser/json/keywords.json');
+    const response = await axios.get('https://raw.githubusercontent.com/danexrc/dane.lol/refs/heads/main/public/projects/assets/viewguesser/json/keywords.json');
     const randomWords = response.data;
     const queries = [];
     for (let i = 0; i < count; i++) {
