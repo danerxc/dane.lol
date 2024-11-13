@@ -1,0 +1,80 @@
+{
+    "losingbackgrounds": [
+        {
+            "backgroundURL": "assets/viewguesser/backgrounds/losing/1.gif",
+            "endComment": "What? That's the best you can do?"
+        },
+        {
+            "backgroundURL": "assets/viewguesser/backgrounds/losing/2.gif",
+            "endComment": "Oops! Did you forget how to win?"
+        },
+        {
+            "backgroundURL": "assets/viewguesser/backgrounds/losing/3.gif",
+            "endComment": "If at first you don’t succeed… well, you know the rest."
+        },
+        {
+            "backgroundURL": "assets/viewguesser/backgrounds/losing/4.gif",
+            "endComment": "Don’t quit your day job!"
+        },
+        {
+            "backgroundURL": "assets/viewguesser/backgrounds/losing/5.gif",
+            "endComment": "It’s not you, it’s… actually, it is you."
+        },
+        {
+            "backgroundURL": "assets/viewguesser/backgrounds/losing/6.gif",
+            "endComment": "At least the game had fun!"
+        },
+        {
+            "backgroundURL": "assets/viewguesser/backgrounds/losing/7.gif",
+            "endComment": "I suggest you hold this L..."
+        }
+    ],
+    "decentbackgrounds": [
+        {
+            "backgroundURL": "assets/viewguesser/backgrounds/decent/1.gif",
+            "endComment": "Not a bad score!"
+        },
+        {
+            "backgroundURL": "assets/viewguesser/backgrounds/decent/2.gif",
+            "endComment": "Pretty good! Now let’s aim for legendary."
+        },
+        {
+            "backgroundURL": "assets/viewguesser/backgrounds/decent/3.gif",
+            "endComment": "You’re not the best… but you’re definitely not the worst!"
+        },
+        {
+            "backgroundURL": "assets/viewguesser/backgrounds/decent/4.gif",
+            "endComment": "That’s what we call ‘above average’ around here!"
+        },
+        {
+            "backgroundURL": "assets/viewguesser/backgrounds/decent/5.gif",
+            "endComment": "You didn’t totally embarrass yourself. Congrats!"
+        }
+    ],
+    "winningbackgrounds": [
+        {
+            "backgroundURL": "assets/viewguesser/backgrounds/winning/1.gif",
+            "endComment": "Okay, now you’re just showing off!"
+        },
+        {
+            "backgroundURL": "assets/viewguesser/backgrounds/winning/2.gif",
+            "endComment": "Time to celebrate! Your score is so good, even the confetti threw a party!"
+        },
+        {
+            "backgroundURL": "assets/viewguesser/backgrounds/winning/3.gif",
+            "endComment": "Legendary! Are you even human?"
+        },
+        {
+            "backgroundURL": "assets/viewguesser/backgrounds/winning/4.gif",
+            "endComment": "Time to raise the roof! Your score just broke through it!"
+        },
+        {
+            "backgroundURL": "assets/viewguesser/backgrounds/winning/5.gif",
+            "endComment": "Stop it, you’re making the rest of us look bad!"
+        },
+        {
+            "backgroundURL": "assets/viewguesser/backgrounds/winning/6.gif",
+            "endComment": "I score… and I don’t miss!"
+        }
+    ]
+}
