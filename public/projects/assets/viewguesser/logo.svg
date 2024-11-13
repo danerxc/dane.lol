@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg width="100%" height="100%" viewBox="0 0 500 254" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2;">
+    <g transform="matrix(1,0,0,1,-6.03839,-28.5)">
+        <g transform="matrix(0.941606,0,0,0.934307,28.5693,3.67518)">
+            <path d="M455,128.25C455,109.347 439.772,94 421.016,94L214.984,94C196.228,94 181,109.347 181,128.25L181,196.75C181,215.653 196.228,231 214.984,231L421.016,231C439.772,231 455,215.653 455,196.75L455,128.25Z" style="fill:rgb(255,0,0);"/>
+        </g>
+        <g transform="matrix(1.55046,0,0,1.55046,19.2972,-74.2235)">
+            <text x="23px" y="176px" style="font-family:'KenyanCoffee', 'Kenyan Coffee';font-size:76.783px;">View</text>
+        </g>
+        <g transform="matrix(1.55046,0,0,1.55046,168.297,-72.2235)">
+            <text x="23px" y="176px" style="font-family:'KenyanCoffee', 'Kenyan Coffee';font-size:76.783px;fill:white;">Guesser</text>
+        </g>
+    </g>
+</svg>
